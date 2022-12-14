@@ -2,7 +2,7 @@
   "name": "test-trade",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "frontend/src/index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -18,7 +18,8 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.12.1",
-    "mongoose": "^6.8.0"
+    "mongoose": "^6.8.0",
+    "socket.io": "^4.5.4"
   },
   "devDependencies": {
     "connect-livereload": "^0.6.1",
