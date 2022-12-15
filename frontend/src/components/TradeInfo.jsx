@@ -2,8 +2,8 @@ import { useState } from "react";
 
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import Timer from "./Timer";
-import Users from "./Users";
+import Timer from "./Timer.jsx";
+import Users from "./Users.jsx";
 import ModalTrade from "./ModalTrade";
 
 const TradeInfo = () => {
