@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import express from "express";
-// import UserModel from "./models/User.js";
+import UserModel from "./frontend/src/models/User.js";
 import router from "./router.js";
 
 import { createServer } from "http";

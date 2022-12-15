@@ -7,10 +7,10 @@ import {
   BrowserRouter,
 } from "react-router-dom";
 
-import Login from "./components/Login";
-import TradeInfo from "./components/TradeInfo";
-import AuthContext from "./context";
-import useAuth from "./hooks/useAuth";
+import Login from "./components/Login.jsx";
+import TradeInfo from "./components/TradeInfo.jsx";
+import AuthContext from "./context/index.jsx";
+import useAuth from "./hooks/useAuth.jsx";
 
 
 const AuthProvider = ({ children }) => {
