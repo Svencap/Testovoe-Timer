@@ -9,6 +9,10 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    participates: {
+        type: Boolean,
+        required: true,
+    },
 });
 
 export default mongoose.model('User', UserSchema);
