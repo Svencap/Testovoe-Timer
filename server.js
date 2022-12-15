@@ -10,11 +10,13 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
 const http = createServer(app);
-
-const io = new Server(http);
+// { pingInterval: 80000, pingTimeout: 40000 }
+const io = new Server(http, {
+  pingTimeout: 60000,
+});
 
 app.use(express.json());
 app.use("/api/v1", router);
@@ -25,10 +27,11 @@ const runApp = async () => {
       .connect(process.env.DB_URL)
       .then(() => console.log("connection to Mongo"));
 
-    io.on("connect", (socket) => {
+    io.on("connection", (socket) => {
       console.log({ socketId: socket.id });
     });
-    http.listen(port, () => console.log(`Listening on port ${port}`));
+
+    http.listen(PORT, () => console.log(`Listening on port ${PORT}`));
   } catch (error) {}
 };
 
