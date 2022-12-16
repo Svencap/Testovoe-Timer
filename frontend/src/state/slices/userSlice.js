@@ -16,7 +16,8 @@ export const fetchGetUsers = createAsyncThunk(
 
 const getNormalalized = (data) => {
   const entities = data.reduce((acc, item) => {
-    acc[item._id] = item;
+    const { _id, name, password, participates, __v } = item;
+    acc[item._id] = { id: _id, name, password, participates, __v};
     return acc;
   }, {});
 
@@ -31,7 +32,8 @@ export const userSlice = createSlice({
   name: "users",
   initialState: usersAdapter.getInitialState({ error: false }),
   reducers: {
-
+    // joinUser: usersAdapter.updateOne
+    joinUser: usersAdapter.addOne
   },
   extraReducers: (builder) => {
     builder
@@ -46,6 +48,7 @@ export const userSlice = createSlice({
 });
 
 
+export const { actions } = userSlice;
 export const usersSelectors = usersAdapter.getSelectors((state) => state.users);
 
 export default userSlice.reducer;

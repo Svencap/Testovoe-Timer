@@ -17,8 +17,8 @@ const Users = () => {
 
   return (
     <ListGroup>
-      {users.map(({ _id, name }) => (
-        <ListGroup.Item key={_id}>{name}</ListGroup.Item>
+      {users.map(({ id, name }) => (
+        <ListGroup.Item key={id}>{name}</ListGroup.Item>
       ))}
     </ListGroup>
   );
