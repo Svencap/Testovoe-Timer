@@ -33,7 +33,8 @@ export const userSlice = createSlice({
   initialState: usersAdapter.getInitialState({ error: false }),
   reducers: {
     // joinUser: usersAdapter.updateOne
-    joinUser: usersAdapter.addOne
+    joinUser: usersAdapter.addOne,
+    leaveUser: usersAdapter.removeOne
   },
   extraReducers: (builder) => {
     builder

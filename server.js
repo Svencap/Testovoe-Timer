@@ -39,6 +39,17 @@ const runApp = async () => {
           callback({ status: 'error' });
         }
       })
+
+      socket.on('leave', async (username, callback) => {
+        try {
+          const updateUser = await UserModel.findOneAndUpdate({ name: username }, { participates: false }, { new: true });
+          console.log(updateUser);
+          io.emit('leave', updateUser);
+          callback({ status: 'ok' });
+        } catch (error) {
+          callback({ status: 'error' });
+        }
+      })
     });
 
 
