@@ -1,14 +1,20 @@
+import { useContext } from "react";
+import { useSelector } from "react-redux";
+import { usersSelectors } from "../state/slices/userSlice";
+import { SocketContext } from "../context/socket";
+
 import { Modal } from "react-bootstrap";
 import { Table } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { Container } from "react-bootstrap";
-import { useSelector } from "react-redux";
-import { usersSelectors } from "../state/slices/userSlice";
 import Timer from "./Timer";
 
 const ModalTrade = ({ show, setShow }) => {
   const users = useSelector(usersSelectors.selectAll);
-  console.log(users);
+  const { username } = JSON.parse(localStorage.getItem("user"));
+
+  const { handleLeave } = useContext(SocketContext);
+
   return (
     <Modal
       show={show}
@@ -62,7 +68,15 @@ const ModalTrade = ({ show, setShow }) => {
         <Button variant="secondary" onClick={() => setShow(false)}>
           Закрыть
         </Button>
-        <Button variant="danger">Покинуть торги</Button>
+        <Button
+          variant="danger"
+          onClick={() => {
+            handleLeave(username);
+            setShow(false);
+          }}
+        >
+          Покинуть торги
+        </Button>
       </Modal.Footer>
     </Modal>
   );

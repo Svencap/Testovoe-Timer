@@ -13,11 +13,22 @@ const SocketProvider = ({ socket, children }) => {
     dispatch(usersSlice.joinUser({ id: _id, name, password, participates, __v }));
   });
 
+  socket.on("leave", (payload) => {
+    console.log(payload);
+    const { _id } = payload;
+    dispatch(usersSlice.leaveUser(_id));
+  });
+
+
   const handleJoin = (username) => socket.emit("join", username, (response) => {
     if (response.status !== 'ok') console.log('woops :(');
   });
 
-  const socketHandles = { handleJoin };
+  const handleLeave = (username) => socket.emit('leave', username, (response) => {
+    if (response.status !== 'ok') console.log('woops :(');
+  })
+
+  const socketHandles = { handleJoin, handleLeave };
 
   return (
     <SocketContext.Provider value={socketHandles}>
