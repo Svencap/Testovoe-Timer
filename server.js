@@ -29,7 +29,19 @@ const runApp = async () => {
 
     io.on("connection", (socket) => {
       console.log({ socketId: socket.id });
+
+      socket.on('join', async (username, callback) => {
+        try {
+          const updateUser = await UserModel.findOneAndUpdate({ name: username }, { participates: true }, { new: true });
+          io.emit('join', updateUser);
+          callback({ status: 'ok' });
+        } catch (error) {
+          callback({ status: 'error' });
+        }
+      })
     });
+
+
 
     http.listen(PORT, () => console.log(`Listening on port ${PORT}`));
   } catch (error) {}
