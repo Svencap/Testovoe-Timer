@@ -2,9 +2,13 @@ import { Modal } from "react-bootstrap";
 import { Table } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { Container } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { usersSelectors } from "../state/slices/userSlice";
 import Timer from "./Timer";
 
 const ModalTrade = ({ show, setShow }) => {
+  const users = useSelector(usersSelectors.selectAll);
+  console.log(users);
   return (
     <Modal
       show={show}
@@ -20,37 +24,36 @@ const ModalTrade = ({ show, setShow }) => {
       </Modal.Header>
       <Modal.Body>
         <Container className="d-flex justify-content-between align-items-center">
-            <p>ХОД</p>
-            <Timer />
+          <p>ХОД</p>
+          <Timer />
         </Container>
         <Table striped bordered hover>
           <thead>
             <tr>
               <th>Параметры и требования</th>
-              <th>First Name</th>
-              <th>Last Name</th>
+              {users.map(({ id, name }) => (
+                <td key={id}>{name}</td>
+              ))}
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>Наличие комплекса мероприятий</td>
-              <td>Mark</td>
-              <td>Otto</td>
+              {users.map(({ id }) => (
+                <td key={id}>-</td>
+              ))}
             </tr>
             <tr>
               <td>Срок изготовления лота</td>
-              <td>Jacob</td>
-              <td>Thornton</td>
+              {users.map(({ id }) => (
+                <td key={id}>-</td>
+              ))}
             </tr>
             <tr>
               <td>Гарантийные обязательста</td>
-              <td>Larry the Bird</td>
-              <td>@twitter</td>
-            </tr>
-            <tr>
-              <td>Условия опталы</td>
-              <td>-</td>
-              <td>-</td>
+              {users.map(({ id }) => (
+                <td key={id}>-</td>
+              ))}
             </tr>
           </tbody>
         </Table>
