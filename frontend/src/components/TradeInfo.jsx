@@ -23,7 +23,8 @@ const TradeInfo = () => {
           <Users />
         </Card.Body>
         <Card.Footer className="d-flex flex-row-reverse">
-          <Button onClick={() => setShow(true)} variant="primary">Присоединиться</Button>
+          <Button onClick={() => setShow(true)} className="ms-4" variant="primary">Показать ход</Button>
+          <Button variant="success">Присоединиться</Button>
         </Card.Footer>
       </Card>
       <ModalTrade show={show} setShow={setShow} />
