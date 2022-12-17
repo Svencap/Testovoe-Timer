@@ -1,11 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Alert } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+// import { updateTimer } from "../state/slices/timerSlice";
 import { usersSelectors } from "../state/slices/userSlice";
+import { SocketContext } from "../context/socket";
 
 const Timer = () => {
 
-  const [time, setTime] = useState(60);
+  const time = useSelector((state) => state.timer.time);
+
+  // const dispatch = useDispatch();
+  const { startTimer } = useContext(SocketContext);
+
+
+  // const [time, setTime] = useState(60);
 
   const sliceTimer = (time) => String(time).padStart(2, '0');
 
@@ -18,7 +26,10 @@ const Timer = () => {
   useEffect(() => {
     if (users) {
       const intervalId = setInterval(() => {
-        setTime((time) => time >= 1 ? time - 1 : 0);
+        const newTime = time >= 1 ? time - 1 : 0;
+        startTimer(newTime);
+        // dispatch(updateTimer(newTime));
+        // setTime((time) => time >= 1 ? time - 1 : 0);
       }, 1000)
       return () => clearInterval(intervalId);
     }
