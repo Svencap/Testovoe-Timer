@@ -9,7 +9,7 @@ import { Provider } from "react-redux";
 import SocketProvider from "./context/socket.jsx";
 
 const init = async () => {
-  const socket = io();
+  const socket = io('https://timer-0dus.onrender.com');
 
   const root = ReactDOM.createRoot(document.getElementById("root"));
   root.render(
