@@ -1,14 +1,14 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { Alert } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { updateTimer } from "../state/slices/timerSlice";
+// import { updateTimer } from "../state/slices/timerSlice";
 import { usersSelectors } from "../state/slices/userSlice";
 import { SocketContext } from "../context/socket";
 
 const Timer = () => {
   const time = useSelector((state) => state.timer.time);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { startTimer } = useContext(SocketContext);
 
   const sliceTimer = (time) => String(time).padStart(2, "0");
@@ -40,7 +40,7 @@ const Timer = () => {
       }, 1000);
     }
     return () => clearInterval(intervalId);
-  }, [time, currentUser]);
+  }, [time, currentUser, startTimer]);
 
   return (
     <Alert variant="danger" className="d-flex justify-content-center">

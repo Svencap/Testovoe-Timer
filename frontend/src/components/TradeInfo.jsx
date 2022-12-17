@@ -12,7 +12,7 @@ import { SocketContext } from "../context/socket.jsx";
 
 const TradeInfo = () => {
   const [show, setShow] = useState(false);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { username } = JSON.parse(localStorage.getItem("user"));
   const isParticipatingUser = useSelector(usersSelectors.selectAll).find(
     ({ name }) => name === username
