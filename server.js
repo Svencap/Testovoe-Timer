@@ -50,6 +50,10 @@ const runApp = async () => {
           callback({ status: 'error' });
         }
       })
+
+      socket.on('timer', (time) => {
+        io.emit('timer', time);
+      })
     });
 
 

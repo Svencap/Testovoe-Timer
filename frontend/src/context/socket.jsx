@@ -1,6 +1,7 @@
 import { createContext } from "react";
 import { useDispatch } from "react-redux";
 import { actions as usersSlice } from "../state/slices/userSlice";
+import { updateTimer } from "../state/slices/timerSlice";
 
 export const SocketContext = createContext({});
 
@@ -19,6 +20,10 @@ const SocketProvider = ({ socket, children }) => {
     dispatch(usersSlice.leaveUser(_id));
   });
 
+  socket.on("timer", (payload) => {
+    dispatch(updateTimer(payload));
+  });
+
 
   const handleJoin = (username) => socket.emit("join", username, (response) => {
     if (response.status !== 'ok') console.log('woops :(');
@@ -28,7 +33,10 @@ const SocketProvider = ({ socket, children }) => {
     if (response.status !== 'ok') console.log('woops :(');
   })
 
-  const socketHandles = { handleJoin, handleLeave };
+
+  const startTimer = (time) => socket.emit('timer', time)
+  
+  const socketHandles = { handleJoin, handleLeave, startTimer };
 
   return (
     <SocketContext.Provider value={socketHandles}>
