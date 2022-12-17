@@ -13,8 +13,6 @@ const Timer = () => {
   const { startTimer } = useContext(SocketContext);
 
 
-  // const [time, setTime] = useState(60);
-
   const sliceTimer = (time) => String(time).padStart(2, '0');
 
   const minutes = sliceTimer(Math.floor(time / 60));
@@ -22,17 +20,20 @@ const Timer = () => {
 
   const { username } = JSON.parse(localStorage.getItem('user'));
   const users = useSelector(usersSelectors.selectAll).find(({ name }) => name === username);
-  
   useEffect(() => {
-    if (users) {
-      const intervalId = setInterval(() => {
+    let intervalId;
+    if (users && Number(localStorage.getItem('timer')) !== 0) {
+      intervalId = setInterval(() => {
         const newTime = time >= 1 ? time - 1 : 0;
+        localStorage.setItem('timer', time);
+        if (Number(localStorage.getItem('timer')) === 0) {
+          localStorage.setItem('timer', 10);
+          return clearInterval(intervalId);
+        }
         startTimer(newTime);
-        // dispatch(updateTimer(newTime));
-        // setTime((time) => time >= 1 ? time - 1 : 0);
       }, 1000)
-      return () => clearInterval(intervalId);
     }
+    return () => clearInterval(intervalId);
   }, [time, users])
 
   return (
