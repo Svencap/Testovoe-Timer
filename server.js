@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import express from "express";
 import UserModel from "./frontend/src/models/User.js";
 import router from "./router.js";
+import corse from 'cors';
 
 import { createServer } from "http";
 import { Server } from "socket.io";
@@ -19,6 +20,7 @@ const io = new Server(http, {
 });
 
 app.use(express.json());
+app.use(corse());
 app.use("/api/v1", router);
 
 const runApp = async () => {
@@ -55,9 +57,6 @@ const runApp = async () => {
         io.emit('timer', time);
       })  
     });
-
-
-
     http.listen(PORT, () => console.log(`Listening on port ${PORT}`));
   } catch (error) {}
 };
