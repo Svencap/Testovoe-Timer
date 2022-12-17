@@ -3,6 +3,7 @@ import express from "express";
 import UserModel from "./frontend/src/models/User.js";
 import router from "./router.js";
 import corse from "cors";
+import path from "path";
 
 import { createServer } from "http";
 import { Server } from "socket.io";
@@ -21,6 +22,10 @@ const io = new Server(http, {
   },
 });
 app.use(corse());
+
+
+
+app.use(express.static(path.join(__dirname, 'build')));
 app.use(express.json());
 app.use("/api/v1", router);
 
