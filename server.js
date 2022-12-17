@@ -10,7 +10,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 
 const http = createServer(app);
 // { pingInterval: 80000, pingTimeout: 40000 }
@@ -53,7 +53,7 @@ const runApp = async () => {
 
       socket.on('timer', (time) => {
         io.emit('timer', time);
-      })
+      })  
     });
 
 
