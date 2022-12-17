@@ -9,8 +9,6 @@ const Users = () => {
   const dispatch = useDispatch();
   const users = useSelector(usersSelectors.selectAll);
 
-  console.log(users);
-
   useEffect(() => {
     dispatch(fetchGetUsers());
   }, [dispatch]);

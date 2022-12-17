@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { usersSelectors } from "../state/slices/userSlice.js";
+import { Alert } from "react-bootstrap";
 
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -13,9 +14,10 @@ const TradeInfo = () => {
   const [show, setShow] = useState(false);
   const dispatch = useDispatch();
   const { username } = JSON.parse(localStorage.getItem("user"));
-  const participatingUser = useSelector(usersSelectors.selectAll)
-        .find(({ name }) => name === username);
-  const { handleJoin } = useContext(SocketContext);
+  const isParticipatingUser = useSelector(usersSelectors.selectAll).find(
+    ({ name }) => name === username
+  );
+  const { handleJoin, handleLeave } = useContext(SocketContext);
 
   return (
     <>
@@ -27,7 +29,13 @@ const TradeInfo = () => {
       >
         <Card.Header>Торг на аппарат ЛОТОС #123123</Card.Header>
         <Card.Body>
-          <Timer />
+          {isParticipatingUser ? (
+            <Timer />
+          ) : (
+            <Alert variant="info" className="d-flex justify-content-center">
+              Вы не участвуете
+            </Alert>
+          )}
           <Card.Text>Список участников</Card.Text>
           <Users />
         </Card.Body>
@@ -35,15 +43,23 @@ const TradeInfo = () => {
           <Button
             onClick={() => setShow(true)}
             className="ms-4"
-            variant={!participatingUser ? "secondary" : "primary"}
-            disabled={!participatingUser}
+            variant={!isParticipatingUser ? "secondary" : "primary"}
+            disabled={!isParticipatingUser}
           >
             Показать ход
           </Button>
-          <Button onClick={() => handleJoin(username)}  variant="success">Присоединиться</Button>
+          {!isParticipatingUser ? (
+            <Button onClick={() => handleJoin(username)} variant="success">
+              Присоединиться
+            </Button>
+          ) : (
+            <Button onClick={() => handleLeave(username)} variant="danger">
+              Покинуть
+            </Button>
+          )}
         </Card.Footer>
       </Card>
-      <ModalTrade show={show} setShow={setShow} /> 
+      <ModalTrade show={show} setShow={setShow} />
     </>
   );
 };
