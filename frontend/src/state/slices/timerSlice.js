@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     // minutes: 2,
     // seconds: 0
-    time: 120,
+    time: Number(localStorage.getItem('timer')) === 0 ? 120 : Number(localStorage.getItem('timer')),
 };
 
 export const timerSlice = createSlice({

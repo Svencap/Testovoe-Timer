@@ -75,7 +75,7 @@ const ModalTrade = ({ show, setShow }) => {
             setShow(false);
           }}
         >
-          Покинуть торги
+          Покинуть
         </Button>
       </Modal.Footer>
     </Modal>

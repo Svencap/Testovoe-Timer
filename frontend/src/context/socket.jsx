@@ -17,6 +17,8 @@ const SocketProvider = ({ socket, children }) => {
   socket.on("leave", (payload) => {
     console.log(payload);
     const { _id } = payload;
+    localStorage.removeItem('timer');
+    dispatch(updateTimer(120));
     dispatch(usersSlice.leaveUser(_id));
   });
 

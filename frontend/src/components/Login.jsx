@@ -44,7 +44,7 @@ const Login = () => {
               className="col-12 col-md-6 mt-3 mt-mb-0"
               onSubmit={formik.handleSubmit}
             >
-              <h1 className="text-center mb-4">awdawd</h1>
+              <h1 className="text-center mb-4">Войти</h1>
               <Form.Group
                 className="form-floating mb-3"
                 controlId="formBasicEmail"
