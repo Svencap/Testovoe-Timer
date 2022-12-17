@@ -19,7 +19,7 @@ const Login = () => {
     },
     onSubmit: async (values) => {
       try {
-        const { data } = await axios.post("/api/v1/login", values);
+        const { data } = await axios.post("https://timer-0dus.onrender.com/api/v1/login", values);
         localStorage.setItem("user", JSON.stringify(data));
         auth.logIn();
         setSuccessAuth(true);

@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://timer-0dus.onrender.com/",
+  "proxy": "https://timer-0dus.onrender.com:5000",
   "type": "module",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.1",
