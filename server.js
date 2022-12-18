@@ -28,10 +28,14 @@ const __filename = fileURLToPath(import.meta.url);
 
 const __dirname = path.dirname(__filename);
 
-
-app.use(express.static(path.join(__dirname, 'frontend/public')));
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'frontend/build')));
 app.use("/api/v1", router);
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend/build', 'index.html'));
+})
+
 
 const runApp = async () => {
   try {

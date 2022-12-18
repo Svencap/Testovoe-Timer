@@ -8,7 +8,7 @@ import axios from "axios";
 export const fetchGetUsers = createAsyncThunk(
   "users/fetchGetUsers",
   async () => {
-    const { data } = await axios.get("https://timer-0dus.onrender.com/api/v1");
+    const { data } = await axios.get("https://timer-0dus.onrender.com/api/v1/users");
     return data;
   }
 );
