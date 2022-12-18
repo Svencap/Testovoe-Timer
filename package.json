@@ -9,7 +9,7 @@
     "start": "node server.js",
     "dev": "npx nodemon server.js",
     "start-server": "node server.js",
-    "prod": "npm run build --prefix frontend && npm run start-server && npm run start --prefix frontend"
+    "prod": "npm install --prefix frontend && npm run build --prefix frontend && npm run start-server && npm run start --prefix frontend"
   },
   "author": "",
   "license": "ISC",
