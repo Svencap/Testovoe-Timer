@@ -1,14 +1,12 @@
 import { useEffect, useContext } from "react";
 import { Alert } from "react-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
-// import { updateTimer } from "../state/slices/timerSlice";
+import { useSelector } from "react-redux";
 import { usersSelectors } from "../state/slices/userSlice";
 import { SocketContext } from "../context/socket";
 
 const Timer = () => {
   const time = useSelector((state) => state.timer.time);
 
-  // const dispatch = useDispatch();
   const { startTimer } = useContext(SocketContext);
 
   const sliceTimer = (time) => String(time).padStart(2, "0");
@@ -18,16 +16,10 @@ const Timer = () => {
 
   const { username } = JSON.parse(localStorage.getItem("user"));
   const participatingUsers = useSelector(usersSelectors.selectAll);
-  console.log(participatingUsers);
   const currentUser = participatingUsers.find(({ name }) => name === username);
 
   useEffect(() => {
     let intervalId;
-    // if (!participatingUsers.length) {
-    //   localStorage.removeItem("timer");
-    //   localStorage.setItem("timer", 120);
-    //   dispatch(updateTimer(120));
-    // }
     if (currentUser) {
       intervalId = setInterval(() => {
         const newTime = time >= 1 ? time - 1 : 0;
