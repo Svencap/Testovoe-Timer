@@ -13,7 +13,7 @@ const controller = new Controller();
 const router = new Router();
 
 router.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'frontend/build', 'index.html'));
+    res.sendFile(path.join(__dirname, 'frontend/public', 'index.html'));
 })
 router.get('/', controller.getUsers);
 
