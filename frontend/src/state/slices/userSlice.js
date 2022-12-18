@@ -30,9 +30,8 @@ const usersAdapter = createEntityAdapter();
 
 export const userSlice = createSlice({
   name: "users",
-  initialState: usersAdapter.getInitialState({ error: false }),
+  initialState: usersAdapter.getInitialState(),
   reducers: {
-    // joinUser: usersAdapter.updateOne
     joinUser: usersAdapter.addOne,
     leaveUser: usersAdapter.removeOne
   },
@@ -43,8 +42,7 @@ export const userSlice = createSlice({
         const { entities, ids } = getNormalalized(filterUsers);
         state.ids = ids;
         state.entities = entities;
-      })
-      .addCase(fetchGetUsers.rejected, (state, action) => {});
+      });
   },
 });
 

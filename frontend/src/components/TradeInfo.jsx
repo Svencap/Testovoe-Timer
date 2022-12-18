@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { usersSelectors } from "../state/slices/userSlice.js";
 import { Alert } from "react-bootstrap";
 
@@ -12,7 +12,6 @@ import { SocketContext } from "../context/socket.jsx";
 
 const TradeInfo = () => {
   const [show, setShow] = useState(false);
-  // const dispatch = useDispatch();
   const { username } = JSON.parse(localStorage.getItem("user"));
   const isParticipatingUser = useSelector(usersSelectors.selectAll).find(
     ({ name }) => name === username

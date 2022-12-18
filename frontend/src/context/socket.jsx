@@ -10,12 +10,10 @@ const SocketProvider = ({ socket, children }) => {
 
   socket.on("join", (payload) => {
     const { _id, __v, name, password, participates } = payload;
-    // dispatch(usersSlice.joinUser({ _id, changes: { ...payload } }));
     dispatch(usersSlice.joinUser({ id: _id, name, password, participates, __v }));
   });
 
   socket.on("leave", (payload) => {
-    console.log(payload);
     const { _id } = payload;
     localStorage.removeItem('timer');
     dispatch(updateTimer(120));

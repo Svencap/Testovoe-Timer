@@ -12,22 +12,22 @@ import { Server } from "socket.io";
 import * as dotenv from "dotenv";
 dotenv.config();
 
+const __filename = fileURLToPath(import.meta.url);
+
+const __dirname = path.dirname(__filename);
+
 const app = express();
 const PORT = 5000;
 
 const http = createServer(app);
-// { pingInterval: 80000, pingTimeout: 40000 }
 const io = new Server(http, {
   cors: {
     origin: "*",
   },
 });
+
+
 app.use(corse());
-
-const __filename = fileURLToPath(import.meta.url);
-
-const __dirname = path.dirname(__filename);
-
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'frontend/build')));
 app.use("/api/v1", router);
@@ -41,7 +41,7 @@ const runApp = async () => {
   try {
     await mongoose
       .connect(process.env.DB_URL)
-      .then(() => console.log("connection to Mongo"));
+      .then(() => console.log("connection to MongoDB"));
 
     io.on("connection", (socket) => {
       console.log({ socketId: socket.id });
@@ -67,7 +67,6 @@ const runApp = async () => {
             { participates: false },
             { new: true }
           );
-          console.log(updateUser);
           io.emit("leave", updateUser);
           callback({ status: "ok" });
         } catch (error) {
