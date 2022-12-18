@@ -29,7 +29,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 
-app.use(express.static(path.join(__dirname, 'frontend/build')));
+app.use(express.static(path.join(__dirname, 'frontend/public')));
 app.use(express.json());
 app.use("/api/v1", router);
 
