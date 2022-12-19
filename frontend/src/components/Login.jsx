@@ -59,6 +59,7 @@ const Login = () => {
                     placeholder="Ваш ник"
                     required
                     name="name"
+                    autoFocus
                     value={formik.values.name}
                     onChange={formik.handleChange}
                     className={cn(

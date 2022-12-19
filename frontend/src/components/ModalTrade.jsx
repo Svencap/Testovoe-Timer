@@ -29,8 +29,7 @@ const ModalTrade = ({ show, setShow }) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Container className="d-flex justify-content-between align-items-center">
-          <p>ХОД</p>
+        <Container className="d-flex justify-content-center align-items-center">
           <Timer />
         </Container>
         <Table striped bordered hover>
