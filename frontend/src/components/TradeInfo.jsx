@@ -1,7 +1,6 @@
 import { useContext, useState } from "react";
 import { useSelector } from "react-redux";
 import { usersSelectors } from "../state/slices/userSlice.js";
-import { Alert } from "react-bootstrap";
 
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -28,13 +27,7 @@ const TradeInfo = () => {
       >
         <Card.Header>Торг на аппарат ЛОТОС #123123</Card.Header>
         <Card.Body>
-          {isParticipatingUser ? (
-            <Timer />
-          ) : (
-            <Alert variant="info" className="d-flex justify-content-center">
-              Вы не участвуете
-            </Alert>
-          )}
+          <Timer />
           <Card.Text>Список участников</Card.Text>
           <Users />
         </Card.Body>
@@ -45,7 +38,7 @@ const TradeInfo = () => {
             variant={!isParticipatingUser ? "secondary" : "primary"}
             disabled={!isParticipatingUser}
           >
-            Показать ход
+            Показать
           </Button>
           {!isParticipatingUser ? (
             <Button onClick={() => handleJoin(username)} variant="success">

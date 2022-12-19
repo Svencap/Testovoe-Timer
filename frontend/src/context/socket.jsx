@@ -11,6 +11,8 @@ const SocketProvider = ({ socket, children }) => {
   socket.on("join", (payload) => {
     const { _id, __v, name, password, participates } = payload;
     dispatch(usersSlice.joinUser({ id: _id, name, password, participates, __v }));
+    dispatch(updateTimer(120));
+    localStorage.setItem('timer', 120);
   });
 
   socket.on("leave", (payload) => {
